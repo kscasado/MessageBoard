@@ -18,9 +18,9 @@ var users = require('./routes/users');
 
 var app = express();
 
-//var users = require('./routes/users')
 
-//var routes = require('./routes/index');
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -66,6 +66,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+app.listen(3000, function(){
+    console.log('Server is running on 3000.');
+});
 
 module.exports = app;

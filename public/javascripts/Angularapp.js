@@ -75,9 +75,22 @@ app.config([
         var token = auth.getToken();
         var payload = JSON.parse($window.atob(token.split('.')[1]));
 
+
         return payload.username;
       }
     };
+      auth.getPosts = function(){
+        if(auth.isLoggedIn()){
+
+          var token = auth.getToken();
+          var payload = JSON.parse($window.atob(token.split('.')[1]));
+          console.log('auth.isLoggedIn()')
+          console.log(payload.posts);
+          return payload.posts;
+        }
+        console.log('got to payload in posts');
+      };
+
     auth.register = function(user){
         return $http.post('/register', user).success(function(data){
           auth.saveToken(data.token);
@@ -234,5 +247,6 @@ function($scope, $state, auth){
   function($scope, auth){
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.currentUser = auth.currentUser;
+    $scope.userPosts = auth.getPosts;
     $scope.logOut = auth.logOut;
   }]);
